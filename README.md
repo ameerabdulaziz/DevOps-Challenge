@@ -100,3 +100,23 @@ Copyright (c) 2024 by the Tradebyte Software GmbH.<br/>
 The names and images for `DevOps-Challenge` are trademarks of the Tradebyte Software GmbH.
 
 We love free software!
+
+### Run the application on Docker
+Create a docker network
+```bash
+docker network create tornado-network
+```
+Run the tornado-app container
+```bash
+docker run -d --name tornado-redis --network tornado-network -p 6379:6379 redis:alpine
+```
+Build the tornado-app image
+```bash
+docker build -t ameerabdulaziz/tornado-app .
+```
+Run the tornado-app container
+```bash
+docker run -d --name tornado-app --env-file .env --network tornado-network -p 8000:8000 ameerabdulaziz/tornado-app:latest
+```
+
+![img.png](img.png)
